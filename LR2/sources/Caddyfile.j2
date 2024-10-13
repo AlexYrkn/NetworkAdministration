@@ -1,0 +1,16 @@
+{{ domain_name }} {
+        root * /var/www/html
+        file_server
+
+        log {
+                output file {{ log.file }}
+                format json
+                level {{ log.level }}
+        }
+
+        header / {
+          X-Custom-Header "Hello from Caddy"
+        }
+
+        reverse_proxy /api/* localhost:3000
+}
